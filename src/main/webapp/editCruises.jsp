@@ -7,21 +7,20 @@
 </head>
 <body>
 <a href="index.jsp">Main page</a> <br>
-  <c:if test="${loggedUser.roleId != 1}">
-    You are not permitted here!
-  </c:if>
-    <c:if test="${loggedUser.roleId == 1}">
-        <c:forEach items="${cruises}" var="cruise">
-            <form>
+        <c:forEach items="${requestScope.cruises}" var="cruise">
+            <form action="controller" method="post">
                 <input type="hidden" name="command" value="updateCruises">
                 <input name="Name" value="${cruise.name}">
-                <input name="Liner" value="${cruise.liner.name}">
+                <select name="Liner">
+                    <c:forEach items="${requestScope.liners}" var="liner">
+                        <option value="${liner.name}" <c:if test="${cruise.liner.name == liner.name}">selected</c:if><%--TODO TRANSFORM IF TO TAGFILE--%>>${liner.name}</option>
+                    </c:forEach>
+                </select>
                 <input name="Start time" value="${cruise.startTime}">
                 <input name="End time" value="${cruise.endTime}">
                 <input type="hidden" name="Id" value="${cruise.id}">
                 <input type="submit" value="Update">
             </form>
         </c:forEach>
-    </c:if>
 </body>
 </html>

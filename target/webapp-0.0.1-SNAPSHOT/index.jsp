@@ -4,10 +4,13 @@
 <html>
 <body>
 
-    ${registration}
     <c:choose>
         <c:when test="${loggedUser.roleId == 1}">
             You are logged as Admin <br>
+            <form action="controller" method="get">
+                <input type="hidden" name="command" value="listApplication">
+                <input type="submit" value="Application list">
+            </form>
             <form action="controller" method="get">
                 <input type="hidden" name="command" value="logout">
                 <input type="submit" value="Logout">
@@ -25,8 +28,8 @@
         <c:otherwise>
             <form action="controller" method="post">
                 <input type="hidden" name="command" value="login"><br>
-                <input name="login" value="user2"><br>
-                <input name="password" type="password" value="user2pass"><br>
+                <input name="login" value="user1"><br>
+                <input name="password" type="password" value="adminpass"><br>
                 <input type="submit" value="Login">
             </form>
             <form action="controller" method="post">

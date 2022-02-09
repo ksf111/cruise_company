@@ -6,9 +6,10 @@
 </head>
 <body>
 <a href="index.jsp">Main page</a> <br>
-    ${loggedUser.login}
     <form action="controller" method="post">
         <input type="hidden" name="command" value="submitApplication">
+        <input name="Cruise name" value="${cruiseName}" disabled>
+        <input type="hidden" name="CruiseId" value="${cruiseId}">
         <input name="Login" value="${loggedUser.login}">
         <input name="Name">
         <input name="Surname">

@@ -30,9 +30,10 @@
                 <c:if test="${loggedUser.roleId == 2}">
                     <td>
                         <form action="controller" method="post">
-                        <input type="hidden" name="command" value="bookTicket">
-                        <input type="submit" value="Book tickets">
-                        <input type="hidden" name="loggedUser" value="${loggedUser.login}">
+                            <input type="hidden" name="command" value="bookTicket">
+                            <input type="submit" value="Book tickets">
+                            <input type="hidden" name="loggedUser" value="${loggedUser.login}">
+                            <input type="hidden" name="cruiseId" value="${cruise.id}">
                         </form>
                     </td>
                 </c:if>

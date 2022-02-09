@@ -39,13 +39,15 @@ CREATE TABLE users
 );
 CREATE TABLE applications
 (
+    cruise_id BIGINT NOT NULL,
     login VARCHAR(20) NOT NULL,
     name VARCHAR(20) NOT NULL,
     surname VARCHAR(20) NOT NULL,
     birthdate DATE NOT NULL,
     status VARCHAR(20) NOT NULL,
     id BIGINT PRIMARY KEY auto_increment,
-    FOREIGN KEY (login) references users (login)
+    FOREIGN KEY (login) references users (login),
+    FOREIGN KEY (cruise_id) references cruises (id)
 );
 
 INSERT INTO liners VALUES ('Ship 1', 100, 20, DEFAULT);

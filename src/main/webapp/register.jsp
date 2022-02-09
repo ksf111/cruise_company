@@ -5,6 +5,7 @@
     <title>Register page</title>
 </head>
 <body>
+<a href="index.jsp">Main page</a> <br>
 <form action="controller" method="post">
   <input type="hidden" name="command" value="register"><br>
   <input name="login" value=""><br>
