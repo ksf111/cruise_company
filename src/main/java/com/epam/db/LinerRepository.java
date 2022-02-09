@@ -15,10 +15,12 @@ public class LinerRepository implements CrudRepository <Liner, Long>{
     private static final String SQL_GET_BY_ID = "SELECT * FROM liners WHERE id = ?";
     private static final String SQL_GET_BY_NAME = "SELECT * FROM liners WHERE name = ?";
     private static final String SQL_DELETE_BY_NAME = "DELETE FROM liners WHERE name = ?";
+    private static final String SQL_GET_ALL_ASCEND = "SELECT * FROM liners ORDER BY name ASC";
+    private static final String SQL_GET_ALL_DESCEND = "SELECT * FROM liners ORDER BY name DESC";
 
     @Override
     public List<Liner> getAll() {
-        try (Connection connection = ConnectionPool.getInstance().getConnection()) {
+        try (Connection connection = ConnectionPool.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_ALL);
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Liner> liners = new ArrayList<>();
@@ -38,6 +40,51 @@ public class LinerRepository implements CrudRepository <Liner, Long>{
             return null;
         }
     }
+
+    public List<Liner> getAllAscend() {
+        try (Connection connection = ConnectionPool.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_ALL_ASCEND);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Liner> liners = new ArrayList<>();
+            while (resultSet.next()) {
+                Liner liner = new Liner();
+                liner.setId(resultSet.getLong("id"));
+                liner.setName(resultSet.getString("name"));
+                liner.setCrew(resultSet.getInt("crew"));
+                liner.setPassengers(resultSet.getInt("passengers"));
+                liners.add(liner);
+            }
+            resultSet.close();
+            preparedStatement.close();
+            return liners;
+        } catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<Liner> getAllDescend() {
+        try (Connection connection = ConnectionPool.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_ALL_DESCEND);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Liner> liners = new ArrayList<>();
+            while (resultSet.next()) {
+                Liner liner = new Liner();
+                liner.setId(resultSet.getLong("id"));
+                liner.setName(resultSet.getString("name"));
+                liner.setCrew(resultSet.getInt("crew"));
+                liner.setPassengers(resultSet.getInt("passengers"));
+                liners.add(liner);
+            }
+            resultSet.close();
+            preparedStatement.close();
+            return liners;
+        } catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 
     @Override
     public Liner getById(Long id) {

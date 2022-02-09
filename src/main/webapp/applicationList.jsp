@@ -3,10 +3,45 @@
 <html>
 <head>
     <title>Application list</title>
+    <style>
+        table{
+            border:1px solid #000;
+            border-collapse:collapse;
+            text-align: center;
+        }
+        th{
+            border:1px solid #000;
+            text-align: center;
+        }
+        td{
+            border:1px solid #000;
+            text-align: center;
+        }
+        button{
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+
+    </style>
 </head>
 <body>
 <a href="index.jsp">Main page</a> <br>
-<table border="1" align="left">
+<table>
+    <colgroup>
+        <col span="1" style="width: auto;">
+        <col span="1" style="width: auto;">
+        <col span="1" style="width: auto;">
+        <col span="1" style="width: auto;">
+        <col span="1" style="width: auto;">
+        <col span="1" style="width: auto;">
+        <col span="1" style="width: auto;">
+    </colgroup>
     <tr>
         <th>Login</th>
         <th>Name</th>
@@ -17,24 +52,22 @@
     </tr>
     <c:forEach items="${applications}" var="application">
         <tr>
-            <td><c:out value="${application.login}"></c:out></td>
-            <td><c:out value="${application.name}"></c:out></td>
-            <td><c:out value="${application.surname}"></c:out></td>
-            <td><c:out value="${application.birthdate}"></c:out></td>
-            <td><c:out value="${application.status}"></c:out></td>
-            <td><c:out value="${application.cruiseId}"></c:out></td>
+            <td>${application.login}</td>
+            <td>${application.name}</td>
+            <td>${application.surname}</td>
+            <td>${application.birthdate}</td>
+            <td>${application.status}</td>
+            <td>${application.cruiseId}</td>
             <c:if test="${loggedUser.roleId == 1}">
                 <td>
                 <form action="controller" method="get">
                     <input type="hidden" name="command" value="editApplications">
-                    <input type="submit" value="Edit">
                     <input type="hidden" name="Id" value="${application.id}">
+                    <button type="submit" value="Edit">Edit</button>
                 </form>
                 </td>
             </c:if>
         </tr>
-
-
     </c:forEach>
 </table>
 </body>

@@ -24,11 +24,6 @@
                 <td>
                     <c:out value="${liner.crew}"></c:out>
                 </td>
-                <c:if test="${loggedUser.roleId == 2}">
-                <td>
-                    <a href="bookTicket.jsp">Book tickets</a>
-                </td>
-                </c:if>
             </tr>
         </c:forEach>
     </table>
