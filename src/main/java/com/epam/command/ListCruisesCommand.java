@@ -12,7 +12,11 @@ public class ListCruisesCommand implements Command{
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws DBException {
         List<Cruise> cruises = new CruiseRepository().getAll();
-        req.setAttribute("cruises", cruises);
+        req.getSession().setAttribute("cruises", cruises);
+        req.getSession().setAttribute("sortingNames", "ascendingNames");
+        req.getSession().setAttribute("sortingShips", "ascendingShips");
+        req.getSession().removeAttribute("dateStart");
+        req.getSession().removeAttribute("dateEnd");
         return "cruiseList.jsp";
     }
 

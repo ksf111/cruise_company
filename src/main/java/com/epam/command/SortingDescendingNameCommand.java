@@ -6,13 +6,30 @@ import com.epam.db.entity.Cruise;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SortingDescendingNameCommand implements Command {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws DBException {
-        List<Cruise> cruisesDescend = new CruiseRepository().getAllDescendByName();
-        req.setAttribute("cruises", cruisesDescend);
+        List<Cruise> cruisesDescend;
+        String dateStart = (String) req.getSession().getAttribute("dateStart");
+        String dateEnd = (String) req.getSession().getAttribute("dateEnd");
+        System.out.println(dateStart + " " + dateEnd);
+        if (req.getSession().getAttribute("dateStart") != null && req.getSession().getAttribute("dateEnd") != null){
+            dateEnd += " 23:59:59";
+            cruisesDescend = new CruiseRepository().getAllByStartTime(dateStart, dateEnd);
+            System.out.println(cruisesDescend + "<-");
+        }
+        else {
+            cruisesDescend = new CruiseRepository().getAll();
+            System.out.println(cruisesDescend);
+        }
+        cruisesDescend = cruisesDescend.stream().sorted(((o1, o2) -> o2.getName().compareTo(o1.getName()))).collect(Collectors.toList());
+        System.out.println(cruisesDescend);
+        req.getSession().setAttribute("cruises", cruisesDescend);
         req.setAttribute("sortingNames", "descendingNames");
         return "cruiseList.jsp";
     }

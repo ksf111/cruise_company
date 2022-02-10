@@ -24,6 +24,8 @@
 <a href="index.jsp">Main page</a> <br>
 ${sortingNames}
 ${sortingLiners}
+${dateStart}
+${dateEnd}
     <table>
         <colgroup>
             <col span="1" style="width: 15%;">
@@ -33,48 +35,68 @@ ${sortingLiners}
         </colgroup>
         <tr>
             <thead>
-            <th>Name
+            <th>Name</th>
+            <th>Liner</th>
+            <th>Start time</th>
+            <th>End time</th>
+            </thead>
+        </tr>
+        <tr>
+            <td>
                 <c:if test="${sortingNames == 'descendingNames'}">
                 <form action="controller" method="get">
                     <input type="hidden" name="command" value="sortingAscendingName">
-                    <button type="submit" value="">&#8593</button>
+                    <button type="submit" value="">&#8595</button>
                 </form>
                 </c:if>
                 <c:if test="${sortingNames == 'ascendingNames'}">
                     <form action="controller" method="get">
                         <input type="hidden" name="command" value="sortingDescendingName">
-                        <button type="submit" value="">&#8595</button>
+                        <button type="submit" value="">&#8593</button>
                     </form>
                 </c:if>
                 <c:if test="${sortingNames == null}">
                     <form action="controller" method="get">
                         <input type="hidden" name="command" value="sortingDescendingName">
-                        <button type="submit" value="">&#8593</button>
+                        <button type="submit" value="">&#8595</button>
                     </form>
                 </c:if>
-            </th>
-            <th>Liner <c:if test="${sortingLiners == 'descendingLiners'}">
+                </td>
+            <td><c:if test="${sortingLiners == 'descendingLiners'}">
                 <form action="controller" method="get">
                     <input type="hidden" name="command" value="sortingAscendingShip">
-                    <button type="submit" value="">&#8593</button>
+                    <button type="submit" value="">&#8595</button>
                 </form>
             </c:if>
+
                 <c:if test="${sortingLiners == 'ascendingLiners'}">
                     <form action="controller" method="get">
                         <input type="hidden" name="command" value="sortingDescendingShip">
-                        <button type="submit" value="">&#8595</button>
+                        <button type="submit" value="">&#8593</button>
                     </form>
                 </c:if>
                 <c:if test="${sortingLiners == null}">
                     <form action="controller" method="get">
                         <input type="hidden" name="command" value="sortingDescendingShip">
-                        <button type="submit" value="">&#8593</button>
+                        <button type="submit" value="">&#8595</button>
                     </form>
                 </c:if>
-            </th>
-            <th>Start time</th>
-            <th>End time</th>
-            </thead>
+                </td>
+            <td>
+                <form action="controller" method="get">
+                    <input type="hidden" name="command" value="dateStart">
+                    <input type="date" name="dateStart" value="${dateStart}" min="2022-01-01" max="2022-12-31" step="1"> <br>
+                    <input type="date" name="dateEnd" value="${dateEnd}" min="${dateStart}" max="2022-12-31" step="1"<c:if test="${dateStart == null}">disabled</c:if>><br>
+                    <button type="submit" value="">&#8594</button>
+                </form>
+                <c:if test="${dateStart != null && dateEnd != null}">
+                    <form action="controller" method="get">
+                        <input type="hidden" name="command" value="listCruises">
+                        <button type="submit">Reset</button>
+                    </form>
+                </c:if>
+            </td>
+            <td></td>
         </tr>
         <c:forEach items="${cruises}" var="cruise">
             <tr>

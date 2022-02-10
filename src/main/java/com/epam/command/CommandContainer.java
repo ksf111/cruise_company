@@ -23,10 +23,11 @@ public class CommandContainer {
 		commands.put("listApplication", new ListApplicationCommand());
 		commands.put("editApplications", new EditApplicationsCommand());
 		commands.put("updateApplications", new UpdateApplicationsCommand());
-		commands.put(("sortingAscendingName"), new SortingAscendingNameCommand());
-		commands.put(("sortingDescendingName"), new SortingDescendingNameCommand());
-		commands.put(("sortingAscendingShip"), new SortingAscendingShipCommand());
-		commands.put(("sortingDescendingShip"), new SortingDescendingShipCommand());
+		commands.put("sortingAscendingName", new SortingAscendingNameCommand());
+		commands.put("sortingDescendingName", new SortingDescendingNameCommand());
+		commands.put("sortingAscendingShip", new SortingAscendingShipCommand());
+		commands.put("sortingDescendingShip", new SortingDescendingShipCommand());
+		commands.put("dateStart", new DateStartCommand());
 		// ...
 	}
 

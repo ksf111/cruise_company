@@ -15,8 +15,8 @@ public class LinerRepository implements CrudRepository <Liner, Long>{
     private static final String SQL_GET_BY_ID = "SELECT * FROM liners WHERE id = ?";
     private static final String SQL_GET_BY_NAME = "SELECT * FROM liners WHERE name = ?";
     private static final String SQL_DELETE_BY_NAME = "DELETE FROM liners WHERE name = ?";
-    private static final String SQL_GET_ALL_ASCEND = "SELECT * FROM liners ORDER BY name ASC";
-    private static final String SQL_GET_ALL_DESCEND = "SELECT * FROM liners ORDER BY name DESC";
+    /*    private static final String SQL_GET_ALL_ASCEND = "SELECT * FROM liners ORDER BY name ASC";
+    private static final String SQL_GET_ALL_DESCEND = "SELECT * FROM liners ORDER BY name DESC";*/
 
     @Override
     public List<Liner> getAll() {
@@ -41,7 +41,7 @@ public class LinerRepository implements CrudRepository <Liner, Long>{
         }
     }
 
-    public List<Liner> getAllAscend() {
+    /*public List<Liner> getAllAscend() {
         try (Connection connection = ConnectionPool.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_ALL_ASCEND);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -61,9 +61,9 @@ public class LinerRepository implements CrudRepository <Liner, Long>{
             e.printStackTrace();
             return null;
         }
-    }
+    }*/
 
-    public List<Liner> getAllDescend() {
+    /*public List<Liner> getAllDescend() {
         try (Connection connection = ConnectionPool.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_ALL_DESCEND);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -83,7 +83,7 @@ public class LinerRepository implements CrudRepository <Liner, Long>{
             e.printStackTrace();
             return null;
         }
-    }
+    }*/
 
 
     @Override
